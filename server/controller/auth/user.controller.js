@@ -1,14 +1,12 @@
-const passport = require('passport');
 
-const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
+const loginSuccess=(req,res)=>{
+  console.log(req.user)
+  res.send(req.isAuthenticated());
+}
 
-const googleCallback = passport.authenticate('google', {
-  failureRedirect: 'http://localhost:5173/login',
-  successRedirect: 'http://localhost:5173/',
-});
+const loginFailed=()=>{
 
+}
 module.exports={
-    googleAuth,
-    googleCallback,
-
+    loginSuccess
 }

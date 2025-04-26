@@ -5,14 +5,14 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const session = require("express-session");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const dbConnect=require("./db/dbconnect")
 const authRoutes=require("./routes/auth/auth-router")
-const {myGoogleLoginStrategy}=require("./config/passport")
 
-env.config();
 const app = express();  
+env.config();
 const PORT = process.env.PORT || 8000;
+
+require("./config/passport")
 
 app.use(cookieParser());
 app.use(express.json());
@@ -31,21 +31,24 @@ app.use(
   })
 );
 
-myGoogleLoginStrategy(passport)
-
-app.use(passport.initialize());
-
 app.use(session({
-    secret: process.env.MY_SESSION_SECRECT,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge:24 * 60 * 60 * 1000 },
-  }));
+  secret: process.env.MY_SESSION_SECRECT,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge:1*24*60*60*1000
+  }
+}));
+
+app.use(passport.initialize()); 
+app.use(passport.session())
 
 app.use("/auth",authRoutes)
 
-app.get("/", (req, res) => {
-  return res.send("hi bro");
+app.get("/",async (req, res) => {
+  res.send(req.isAuthenticated());
 });
 
 dbConnect.dbConnect().then(

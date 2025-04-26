@@ -1,25 +1,25 @@
 import { useState } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./Pages/home/Home";
 import Login from "./Pages/auth/Login";
 import Error from "./Pages/Error/Error";
-import Publiclayout from "./components/PublicLayout/Publiclayout";
+import Announcement from "./Pages/Announcement/Announcement";
+import VisitorLayout from "./Pages/visitor-view/VisitorLayout";
+import VisitorHome from "./Pages/visitor-view/home";
 function App() {
-
   return (
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/"
-          element={
-            <Publiclayout>
-              <Route path="/" element={<Home />} />
-            </Publiclayout>
-          }
-        ></Route>
-        <Route path="*" element={<Error/>}/>
+
+        <Route path="/visitor" element={<VisitorLayout />}>
+          <Route path="dashboard" element={<VisitorHome />} />
+          <Route path="announcement" element={<Announcement />} />
+        </Route>
+
+        <Route></Route>
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );
