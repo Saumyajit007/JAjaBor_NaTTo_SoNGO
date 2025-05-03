@@ -21,7 +21,7 @@ const AccountDetails=new mongoose.Schema({
     },
     status:{
         type:String,
-        enum:["success","pending"],
+        enum:["success","pending","rejected"],
         default:"pending",
         required:[true,"account status is required"]
     }

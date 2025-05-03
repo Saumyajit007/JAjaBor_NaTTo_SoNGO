@@ -1,19 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
 
 const Login = () => {
   const backenduri = import.meta.env.VITE_BACKEND_HOSTED_PORT;
-
-  const fetchUser=async()=>{
-    try {
-      const userinfo=await axios.get(`${backenduri}/auth/google`)
-      console.log(userinfo)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gray-200 font-winky">

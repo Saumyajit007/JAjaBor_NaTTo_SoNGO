@@ -122,3 +122,7 @@
 @theme{
   --font-winky:"Winky Rough", sans-serif;
 }
+
+.sidebarstyle{
+  @apply font-semibold font-winky mx-6
+}
