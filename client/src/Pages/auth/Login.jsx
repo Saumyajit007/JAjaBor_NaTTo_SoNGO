@@ -20,7 +20,7 @@ const Login = () => {
               <FcGoogle className="scale-200 relative top-1.5"/>
               <span className="pl-3 text-xl font-semibold">google</span>
             </div>  
-          </Link>
+          </Link> 
         </div>
 
       </div>

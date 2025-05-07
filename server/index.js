@@ -47,14 +47,10 @@ app.use(passport.session())
 
 app.use("/auth",authRoutes)
 
-app.get("/",async (req, res) => {
-  res.send(req.isAuthenticated());
-});
-
 dbConnect.dbConnect().then(
   ()=>{
     app.listen(PORT,()=>{
-      console.log(`servver running at port ${PORT}`)
+      console.log(`server running at port ${PORT}`)
     })
   }
 ).catch((err)=>{

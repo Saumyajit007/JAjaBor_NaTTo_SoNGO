@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {loginSuccess} = require('../../controller/auth/user.controller');
+const {checkAuth} = require('../../controller/auth/user.controller');
 const passport=require("passport")
 
 
@@ -11,6 +11,6 @@ router.get('/google/callback',  passport.authenticate('google', {
   successRedirect:"http://localhost:5173/"
 }));
 
-router.get('/google/login/success',loginSuccess)
+router.get('/check-auth',checkAuth)
 
 module.exports = router;
