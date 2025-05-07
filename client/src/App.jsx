@@ -37,20 +37,6 @@ const dispatch=useDispatch()
 useEffect(()=>{
   dispatch(checkUser())
 },[dispatch])
-// useEffect(()=>{
-//   const fetchres=async ()=>{
-//     try {
-//       const response=await axios.get("http://localhost:3000/auth/check-auth",{
-//         withCredentials: true
-//       })
-//       console.log(response.data)
-//     } catch (error) {
-//       console.log(error.response)
-//     }
-//   }
-
-//   fetchres()
-// },[])
 
   return (
     <>

@@ -15,7 +15,7 @@ if (req.isAuthenticated()) {
     role:req.user?.role,
     isAuthenticated:true
   }
-  console.log(req.isAuthenticated())
+
   return res
   .status(200)
   .json(
@@ -30,6 +30,16 @@ if (req.isAuthenticated()) {
 return res.status(400).json(new ApiError(400,"unable to logged-in"))
 };
 
+
+const logout=(req,res)=>{
+  req.logout((err)=>{
+    if (err) {
+      return res.status(500).json({message:"logout failed, try again"})
+    }
+    return res.status(200).json(new ApiResponse(200,"log-out successful"))
+  })
+}
 module.exports = {
-  checkAuth
+  checkAuth,
+  logout
 };

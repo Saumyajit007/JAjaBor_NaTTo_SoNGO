@@ -25,6 +25,18 @@ export const checkUser=createAsyncThunk(
     }
 )
 
+export const logOut=createAsyncThunk("/auth/logout",
+    async ()=>{
+        try {
+            const response=await axios.get(`${backenduri}/auth/logout`,{
+                withCredentials:true
+            })
+            return response.data
+        } catch (error) {
+            throw error.response.data
+        }
+    }
+)
 const authSlice=createSlice({
     name:'auth',
     initialState,
@@ -37,15 +49,20 @@ const authSlice=createSlice({
             state.isLoading=true
         })
         .addCase(checkUser.fulfilled,(state,action)=>{
-            console.log(action)
             state.isLoading=false
             state.isAuthenticated=action.payload.data.isAuthenticated
             state.user=action.payload.success?action.payload.data:null
         })
         .addCase(checkUser.rejected,(state,action)=>{
-            console.log("rejected",action)
             state.isLoading=false
             state.isAuthenticated=false
+            state.errormsg=action.error.message
+        })
+        .addCase(logOut.fulfilled,(state)=>{
+            state.user=null
+            state.isAuthenticated=false
+        })
+        .addCase(logOut.rejected,(state,action)=>{
             state.errormsg=action.error.message
         })
     }
